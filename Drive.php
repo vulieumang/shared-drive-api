@@ -82,29 +82,17 @@ class Drive {
     }
 
     public static function loadListTeamdriveId(){
-        
-        // load page 1, sau đó lấy pageToken của page 1, rồi gọi hàm này với pageToken của page 1
-        // $page_1 = Drive::loadListTeamdrive();
-        // $page_2 = Drive::loadListTeamdrive(json_decode($page_1)->nextPageToken);
-        // $page_3 = Drive::loadListTeamdrive(json_decode($page_2)->nextPageToken);
-        // return $page_3;
 
         $currentPage = Drive::loadListTeamdrive();
         // while current page have nextPageToken
         while (json_decode($currentPage)->nextPageToken) {
-            // print_r($currentPage);
-            // $array_drives[] = json_decode(Drive::loadListTeamdrive(json_decode($currentPage)->nextPageToken))->drives;
             $array_drives[] = json_decode($currentPage)->drives;
             $currentPage = Drive::loadListTeamdrive(json_decode($currentPage)->nextPageToken);
         }
-        // $nextPage = Drive::loadListTeamdrive(json_decode($currentPage)->nextPageToken);
         header('Content-type: application/json');
-
 
         $array_drives_flat = array_merge(...$array_drives);
         file_put_contents('list_teamdrive.json', json_encode($array_drives_flat,JSON_UNESCAPED_UNICODE));
-
-        // print_r(($array_drives_flat)) ;
         
         return json_encode($array_drives_flat);
     
@@ -112,9 +100,6 @@ class Drive {
 
 
     public static function loadListTeamdrive($pageToken=null){
-
-        //api base url
-
         $baseUrl="https://www.googleapis.com/drive/v3/drives";
         $headers['Authorization']=self::generateAuth();
         $headers['Content-type']='application/json';
