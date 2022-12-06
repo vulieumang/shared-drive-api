@@ -29,22 +29,12 @@ so call getCode method.
 ```
 <br/>
 
-#### simple upload (filesize < 5mb)
+#### load list drive
 
 ```php
     require 'Server.php';
     require 'Drive.php';
     //simpleUpload
-    echo Drive::simpleUpload('YOUR_FILE_DOWNLOAD_LINK');
-
-```
-
-#### multipart upload (filesize > 5mb)
-
-```php
-    require 'Server.php';
-    require 'Drive.php';
-    //simpleUpload
-    echo Drive::resumableUpload('YOUR_FILE_DOWNLOAD_LINK','PUT YOUR FILE NAME HERE , example: myFile.mp3');
+   echo Drive::loadListTeamdriveId();
 
 ```
