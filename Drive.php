@@ -104,7 +104,7 @@ class Drive {
         $headers['Authorization']=self::generateAuth();
         $headers['Content-type']='application/json';
         $formParams['pageSize']=100;
-        $formParams['useDomainAdminAccess']=true;
+        $formParams['useDomainAdminAccess']='true';
         $formParams['pageToken']=$pageToken;
 
         $response=Server::sendRequest($baseUrl,$formParams,'get',$headers);
